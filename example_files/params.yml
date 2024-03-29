@@ -1,0 +1,41 @@
+#parameters
+
+Data : [0,1,3,4]   # A vector of flags for the parameters we are erested in (0=beta, 1=fsigma8, 2=r_g, 3=sigma_g, 4=sigma_u). 
+                  
+zrange : [0.,0.5,11] # zmin, zmax, number of redshift bins     
+                     
+cosmo_params:
+
+        Om_0 : 0.3121        # The matter density at z=0
+        gammaval : 0.55    # The value of gammaval to use in the forecasts (where f(z) = Om(z)^gammaval)
+        r_g : 1.0          # The cross correlation coefficient between the velocity and density fields
+        beta_0 : 0.393      # The value of beta (at z=0, we'll modify this by the redshift dependent value of bias and f as required)
+        sigma_8_0 : 0.8150   # The value of sigma8 at z=0
+        sigma_u : 13.00    # The value of the velocity damping parameter in Mpc/h. I use the values from Jun Koda's paper
+        sigma_g : 4.24     # The value of the density damping parameter in Mpc/h. I use the values from Jun Koda's paper
+        k_max : 0.2         # The maximum k to evaluate for dd, dv and vv correlations 
+                          #(Typical values are 0.1 - 0.2, on smaller scales the models are likely to break down).
+
+survey_area : [0.0, 0.0, 1.745]   # We need to know the survey area for each survey and the overlap area between the surveys 
+                                  #(redshift survey only first, then PV survey only, then overlap.  
+                                  # For fully overlapping we would have {0, 0, size_overlap}. 
+                                  #For redshift larger than PV, we would have {size_red-size_overlap, 0, size_overlap}). 
+                                  #Units are pi steradians, such that full sky is 4.0, half sky is 2.0 etc.
+
+errors:                                 
+        rand : 300.0    # The observational error due to random non-linear velocities (I normally use 300km/s as in Jun Koda's paper)
+        dist : 0.05     # The percentage error on the distance indicator (Typically 0.05 - 0.10 for SNe IA, 0.2 or more for Tully-Fisher or Fundamental Plane) 
+
+
+verbosity : False # How much output on terminal
+
+Pvel_file : "/home/rosselli/fisher_howlett/example_files/example_pk.pickle" # The file containing the velocity divergence power spectrum.
+
+
+
+# The files containing the number density of the surveys. First is the PV survey, then the redshift survey.
+# I also typically save nbar x 10^6 in the input file to make sure I don't lose precision when outputting small nbar values to files. This is corrected when the nbar file
+# is read in, so see the read_nz() routine using density_unit!
+nbar_file : ["/home/rosselli/fisher_howlett/example_files/example_nbar_vel.dat", 
+            "/home/rosselli/fisher_howlett/example_files/example_nbar_red.dat"]   
+density_unity: 1.e-6 
