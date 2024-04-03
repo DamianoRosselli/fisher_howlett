@@ -31,17 +31,24 @@ def read_power_spectra_files(PV_file):
 
 def read_nz_files(files, density_unit):
     """ """
+    if files[0] is None & files[1] is None:
+        raise ValueError('provide at least one density distribution')
 
-    zv , nv = np.genfromtxt(files[0], unpack=True)
-    zr , nr = np.genfromtxt(files[1], unpack=True)
+    if files[0] is None:
+        zv = None 
+        nv  = None  
+    else:
+        zv , nv = np.genfromtxt(files[0], unpack=True)
 
-    if len(zv) != len(zr):
-        raise ValueError("The number of redshift bins for each sample must match")
+    if files[1] is None:
+        zr = None 
+        nr  = None  
+    else:
+        zr , nr = np.genfromtxt(files[1], unpack=True)
 
     n_vel = nv * density_unit
     n_red = nr * density_unit
     
-
     return zv, zr, sc.interpolate.InterpolatedUnivariateSpline(zv, n_vel), sc.interpolate.InterpolatedUnivariateSpline(zr, n_red)
 
 

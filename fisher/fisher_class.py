@@ -87,6 +87,15 @@ class Fisher(abc.ABC):
         #spline on nbar
         self._z_vel,self._z_red,self._nbar_vel, self._nbar_red = rfi.read_nz_files( self._config['nbar_file'] ,  self._config['density_unity'])
 
+        if self._z_vel is None:
+            self._z_vel = np.zeros(len(self._z_red))
+            self._nbar_vel = np.zeros(len(self._z_red))
+
+        elif self._z_red is None:
+            self._z_red = np.zeros(len(self._z_vel))
+            self._nbar_red = np.zeros(len(self._z_vel))
+
+        
         #compute some spline for later 
         self._r_spline = ut.compute_r_spline(self._cosmo_params['Om_0'])
         self._growth_spline = ut.compute_growth_spline(self._cosmo_params['Om_0'],self._cosmo_params['gammaval'])
