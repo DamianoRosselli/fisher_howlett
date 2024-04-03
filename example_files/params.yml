@@ -36,6 +36,7 @@ Pvel_file : "/home/rosselli/fisher_howlett/example_files/example_pk.pickle" # Th
 # The files containing the number density of the surveys. First is the PV survey, then the redshift survey.
 # I also typically save nbar x 10^6 in the input file to make sure I don't lose precision when outputting small nbar values to files. This is corrected when the nbar file
 # is read in, so see the read_nz() routine using density_unit!
-nbar_file : ["/home/rosselli/fisher_howlett/example_files/example_nbar_vel.dat", 
-            "/home/rosselli/fisher_howlett/example_files/example_nbar_red.dat"]   
+# if you want to just run forecast using velocities put None for galaxy density or viceversa 
+nbar_file : ["/home/rosselli/fisher_howlett/example_files/example_nbar_vel.dat",  #velocity tracers density
+            "/home/rosselli/fisher_howlett/example_files/example_nbar_red.dat"]   #galaxy density
 density_unity: 1.e-6 
