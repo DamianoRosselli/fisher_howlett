@@ -29,7 +29,7 @@ errors:
 
 verbosity : False # How much output on terminal
 
-Pvel_file : "/home/rosselli/fisher_howlett/example_files/example_pk.pickle" # The file containing the velocity divergence power spectrum.
+Pvel_file : "../example_files/example_pk.pickle" # The file containing the velocity divergence power spectrum.
 
 
 
@@ -37,6 +37,6 @@ Pvel_file : "/home/rosselli/fisher_howlett/example_files/example_pk.pickle" # Th
 # I also typically save nbar x 10^6 in the input file to make sure I don't lose precision when outputting small nbar values to files. This is corrected when the nbar file
 # is read in, so see the read_nz() routine using density_unit!
 # if you want to just run forecast using velocities put None for galaxy density or viceversa 
-nbar_file : ["/home/rosselli/fisher_howlett/example_files/example_nbar_vel.dat",  #velocity tracers density
-            "/home/rosselli/fisher_howlett/example_files/example_nbar_red.dat"]   #galaxy density
+nbar_file : ["../example_files/example_nbar_vel.dat",  #velocity tracers density
+            "../example_files/example_nbar_red.dat"]   #galaxy density
 density_unity: 1.e-6 
