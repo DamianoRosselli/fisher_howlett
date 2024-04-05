@@ -65,7 +65,7 @@ class Fisher(abc.ABC):
             if 3 in self._Data:
                 raise ValueError("ERROR: sigma_g is a free parameter, but there is no information in the density field (Fisher matrix will be singular)")
             
-        if (self._survey_area[1] == 0.) and (self._survey_area[2] == 0.):
+        elif (self._survey_area[1] == 0.) and (self._survey_area[2] == 0.):
             if 4 in self._Data:
                 raise ValueError("ERROR: sigma_u is a free parameter, but there is no information in the velocity field (Fisher matrix will be singular)")
 
@@ -200,7 +200,7 @@ class Fisher(abc.ABC):
                     data_tot[i]['fs8_eff_err'] = np.sqrt(Covariance[w, w])
                     
                 if self._Data[w] == 2 :
-                    data_tot[i]['r_g'] = self._cosmo_params['rg']
+                    data_tot[i]['r_g'] = self._cosmo_params['r_g']
                     data_tot[i]['r_g_err'] = np.sqrt(Covariance[w, w])
                     
                 if self._Data[w] == 3 :
@@ -226,7 +226,7 @@ class Fisher(abc.ABC):
                     if self._Data[w] == 2 :
                         print("r_g \t percentage error")
                         rrg = self._cosmo_params['r_g']
-                        print(f'{rg:.6f} \t {100.0*(np.sqrt(Covariance[w, w])/(rg)):.6f}')
+                        print(f'{rrg:.6f} \t {100.0*(np.sqrt(Covariance[w, w])/(rrg)):.6f}')
 
                     if self._Data[w] == 3 :
                         print("sigma_g \t percentage error")
