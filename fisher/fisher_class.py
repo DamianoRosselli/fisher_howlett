@@ -100,6 +100,9 @@ class Fisher(abc.ABC):
         self._r_spline = ut.compute_r_spline(self._cosmo_params['Om_0'])
         self._growth_spline = ut.compute_growth_spline(self._cosmo_params['Om_0'],self._cosmo_params['gammaval'])
         self._Pmm_spline, self._Pmt_spline, self._Ptt_spline = ut.compute_Pz_spline(self._Pv, np.linspace(self._zmin , self._zmax, self._nzbin))
+        #self._Pmm_spline, self._Pmt_spline, self._Ptt_spline = ut.compute_Pz_spline(self._Pv, np.linspace(0,0.5,11))
+
+
 
         self._Fisher_in_bin = None
         self._data = None
@@ -207,7 +210,7 @@ class Fisher(abc.ABC):
                     data_tot[i]['sigma_g'] = self._cosmo_params['sigma_g']
                     data_tot[i]['sigma_g_err'] = np.sqrt(Covariance[w, w])
                     
-                if self._Data[w] == 3 :
+                if self._Data[w] == 4 :
                     data_tot[i]['sigma_u'] = self._cosmo_params['sigma_u']
                     data_tot[i]['sigma_u_err'] = np.sqrt(Covariance[w, w])
 
@@ -233,7 +236,7 @@ class Fisher(abc.ABC):
                         ssg = self._cosmo_params['sigma_g']
                         print(f'{ssg:.6f} \t {100.0*(np.sqrt(Covariance[w, w])/(ssg)):.6f}')
 
-                    if self._Data[w] == 3 :
+                    if self._Data[w] == 4 :
                         print("sigma_u \t percentage error")
                         ssu =self._cosmo_params['sigma_u']
                         print(f'{ssu:.6f} \t {100.0*(np.sqrt(Covariance[w, w])/(ssu)):.6f}')
