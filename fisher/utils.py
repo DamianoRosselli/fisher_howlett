@@ -67,7 +67,7 @@ def rz_func(z, Om, Od, w0, wa):
     Returns:
         float: Comoving distance to redshift z in units of Mpc/h.
     """
-    result = integrate.quad(ezinv, 0., z, args=(Om, Od, w0, wa), limit=1000)[0]
+    result = sc.integrate.quad(ezinv, 0., z, args=(Om, Od, w0, wa), limit=1000)[0]
     return C_LIGHT_KMS * result / 100.0
 
 
@@ -106,7 +106,7 @@ def growthz_func(red, Om, Od, w0, wa, gammaval):
         float: Growth factor as a function of redshift.
     """
     a = 1.0 / (1.0 + red)
-    result = integrate.quad(growthfunc, a, 1., args=(Om, Od, w0, wa, gammaval), limit=1000)[0]
+    result = sc.integrate.quad(growthfunc, a, 1., args=(Om, Od, w0, wa, gammaval), limit=1000)[0]
     return np.exp(-result)
 
 growthz = np.vectorize(growthz_func)
@@ -125,7 +125,7 @@ def compute_r_spline(Om, Od, w0, wa):
     """
     ztemp = np.linspace(0., 1., 100)
     rtemp = rz(ztemp, Om, Od, w0, wa)
-    r_spline = interpolate.InterpolatedUnivariateSpline(ztemp, rtemp)
+    r_spline = sc.interpolate.InterpolatedUnivariateSpline(ztemp, rtemp)
     return r_spline
 
 
@@ -141,7 +141,7 @@ def compute_growth_spline(Om, Od, w0, wa, gammaval):
     """
     ztemp = np.linspace(0., 1., 100)
     gg = growthz(ztemp, Om, Od, w0, wa, gammaval) / growthz(0., Om, Od, w0, wa, gammaval)
-    g_spline = interpolate.InterpolatedUnivariateSpline(ztemp, gg)
+    g_spline = sc.interpolate.InterpolatedUnivariateSpline(ztemp, gg)
     return g_spline
 
 
@@ -168,9 +168,9 @@ def compute_Pz_spline(P_dic):
             Pmt_array = np.asarray([P_dic[z]['Pmt'][i] for z in z_pk])
             Ptt_array = np.asarray([P_dic[z]['Ptt'][i] for z in z_pk])
 
-            Pmm_spline.append(interpolate.InterpolatedUnivariateSpline(z_pk, Pmm_array))
-            Pmt_spline.append(interpolate.InterpolatedUnivariateSpline(z_pk, Pmt_array))
-            Ptt_spline.append(interpolate.InterpolatedUnivariateSpline(z_pk, Ptt_array))
+            Pmm_spline.append(sc.interpolate.InterpolatedUnivariateSpline(z_pk, Pmm_array))
+            Pmt_spline.append(sc.interpolate.InterpolatedUnivariateSpline(z_pk, Pmt_array))
+            Ptt_spline.append(sc.interpolate.InterpolatedUnivariateSpline(z_pk, Ptt_array))
 
         return np.asarray(Pmm_spline), np.asarray(Pmt_spline), np.asarray(Ptt_spline)
     else:

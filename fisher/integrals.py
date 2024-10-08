@@ -5,7 +5,7 @@ Created on Thu Feb  8 11:24:58 2024
 
 @author: Laurent MAGRI-STELLA & DAMIANO ROSSELLI
 
-C to Python translation of PV_fisher code by Cullan HOWLETT
+
 """
 
 
@@ -265,7 +265,7 @@ def mu_integral(k, zz, Pmm_spline, Pmt_spline, Ptt_spline, par1, par2,
     """
     mu = np.linspace(0., 1., 100)  # Discretize mu
     K, MU, R = np.meshgrid(k, mu, r)  # Create a meshgrid for k, mu, and r
-    mu_val = ut.mu_integrand(MU, K, zz, Pmm_spline, Pmt_spline, Ptt_spline, par1, par2,
+    mu_val = mu_integrand(MU, K, zz, Pmm_spline, Pmt_spline, Ptt_spline, par1, par2,
                           cosmo_params, survey, n_vel, n_red, errors, R, f, beta, sigma8)
 
     # Integrate over r, mu, and k

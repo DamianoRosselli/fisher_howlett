@@ -1,7 +1,18 @@
 #%% CREATE DICTIONARY FOR FISHER FORECASTS CONFIGURATION AND RUN MULTIPLE PROCEDURES
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb  8 11:24:58 2024
 
+@author: Laurent MAGRI-STELLA & DAMIANO ROSSELLI
+
+
+"""
+
+import os
 from . import fisher_class as fcla
 import time
+import pickle
 
 def generate_filenames(zrange_list, fc_file_start):
     """
@@ -128,7 +139,7 @@ def get_configs(common_params, data_params, path):
     return all_configs  # Return the dictionary containing all parameter configurations
 
 
-def run_forecasts(configs, path, namefile, ffc_zbin, ffc_tot):
+def run_forecasts(configs, path, dirsave, namefile, ffc_zbin, ffc_tot):
     """
     Run forecasts for each configuration and save the results.
 
@@ -199,7 +210,7 @@ def run_forecasts(configs, path, namefile, ffc_zbin, ffc_tot):
         all_forecasts[data] = ftype_results  # Store the results for the current survey
 
     # Save the forecast results to a pickle file
-    with open(os.path.join(path, 'forecasts results w0wa', namefile + '.pkl'), 'wb') as f:
+    with open(os.path.join(path, dirsave , namefile + '.pkl'), 'wb') as f:
         pickle.dump(all_forecasts, f)
                 
     print('\n ALL FORECASTS DONE! Results saved in :', namefile)

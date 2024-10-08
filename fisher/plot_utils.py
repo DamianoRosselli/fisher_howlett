@@ -1,4 +1,13 @@
 #%% PLOT FORECASTS FS8
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb  8 11:24:58 2024
+
+@author: Laurent MAGRI-STELLA & DAMIANO ROSSELLI
+
+"""
+
 import numpy as np
 import healpy as hp
 import matplotlib.pyplot as plt
@@ -8,6 +17,7 @@ from os import listdir
 from os.path import isfile, join
 from . import utils as ut
 import pandas as pd
+import pickle
 
 def extract_zrange_from_filename(filename, prefix):
     """
@@ -114,7 +124,7 @@ def get_fs8_ffc(z, cosmo_params):
     growth = ut.compute_growth_spline(Om, Od, w0, wa, gammaval)
     
     # Calculate sigma_8 at each redshift
-    sigma8 = ut.cosmo_params['sigma_8_0'] * growth(z)
+    sigma8 = cosmo_params['sigma_8_0'] * growth(z)
     
     # Compute the growth rate f
     f, _, _ = ut.compute_f_beta(z, cosmo_params)

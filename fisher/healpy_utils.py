@@ -1,4 +1,14 @@
 #%% HEALPY STUFF
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb  8 11:24:58 2024
+
+@author: Laurent MAGRI-STELLA & DAMIANO ROSSELLI
+
+C to Python translation of PV_fisher code by Cullan HOWLETT
+"""
+
 
 import numpy as np
 import healpy as hp
