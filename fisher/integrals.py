@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Feb  8 11:24:58 2024
+MIT License
+
+Copyright (c) 2017 Cullan Howlet
 
 @author: Laurent MAGRI-STELLA & DAMIANO ROSSELLI
 
